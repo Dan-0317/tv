@@ -33,6 +33,7 @@ const Q=new URLSearchParams(location.search);
 function fit(){const b=document.getElementById('fit'),Z=Math.min(2,Math.max(.3,Number(Q.get('zoom'))||1)),vw=innerWidth,vh=innerHeight,s=Math.min(vw/1920,vh/1080)*Z;
  b.style.transform=`translate(${Math.max(0,(vw-1920*s)/2)}px,${Math.max(0,(vh-1080*s)/2)}px) scale(${s})`}
 addEventListener('resize',fit);fit();
+if(Q.has('embed')){const c=document.getElementById('clock');if(c)c.style.display='none'}   // 창고 TV 안에 끼울 때: 시계는 바깥 화면에 있음
 function tick(){const n=new Date();document.getElementById('clock').textContent=n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
  const d=DATA_AT?new Date(DATA_AT):null,el=document.getElementById('stale');if(d&&el){const h=(n-d)/36e5;if(h>=6){el.style.display='inline';el.textContent=`No new data for ${Math.floor(h)} h`}else el.style.display='none'}}
 tick();setInterval(tick,15000);
